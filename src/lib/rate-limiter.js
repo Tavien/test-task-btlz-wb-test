@@ -5,17 +5,17 @@ import { createCircularBuffer } from "./circular-bufer.js";
  * @typedef {Object} RateLiminerConfig
  * @property {number} rate
  * @property {number} [burst]
- * @property {number} period - in Ms
- * @property {number} tick_time - in Ms
- * @property {number} [exponent=8] 
- * @property {boolean} [overwrite=false]
+ * @property {number} period - In Ms
+ * @property {number} tick_time - In Ms
+ * @property {number} [exponent=8] Default is `8`
+ * @property {boolean} [overwrite=false] Default is `false`
  */
 
 /**
  * @template T
  * @callback scheduleFunction
  * @param {Function} task
- * @param {Array<T>} [args=[]]
+ * @param {T[]} [args=[]] Default is `[]`
  * @returns {Promise<T>}
  */
 
@@ -27,7 +27,7 @@ import { createCircularBuffer } from "./circular-bufer.js";
 
 /**
  * @template T
- * @param {RateLiminerConfig} options 
+ * @param {RateLiminerConfig} options
  * @returns {TokenBucketRateLimiter<T>}
  */
 export var createTokenBucketRateLimiter = (options) => {
@@ -39,11 +39,7 @@ export var createTokenBucketRateLimiter = (options) => {
     var buff_exponent = options.exponent || 8;
     var buff_overwrite = options.overwrite || false;
 
-    var buffer = createCircularBuffer(
-        () => null,
-        buff_exponent,
-        buff_overwrite
-    );
+    var buffer = createCircularBuffer(() => null, buff_exponent, buff_overwrite);
 
     var tick_time = options.tick_time || 10;
 
@@ -59,7 +55,6 @@ export var createTokenBucketRateLimiter = (options) => {
     var refillIntervalTicks = ((period / (rate * tick_time)) | 0) + 1;
     var counter = 0;
 
-
     return {
         schedule: (task, args = []) => {
             return new Promise((resolve, reject) => {
@@ -69,7 +64,7 @@ export var createTokenBucketRateLimiter = (options) => {
                         task,
                         args,
                         resolve,
-                        reject
+                        reject,
                     });
                 } catch (error) {
                     reject(error);
@@ -83,17 +78,17 @@ export var createTokenBucketRateLimiter = (options) => {
                                 clearInterval(interval);
                                 interval = null;
                             }
-                        }
-                        else if (tokens) {
+                        } else if (tokens) {
                             tokens--;
                             executedCounter++;
                             /** @type {any} */
                             var item = buffer.shift();
 
                             try {
-                                Promise.resolve(item.task(...item.args))
-                                    .then(item.resolve, item.reject);
-                            } catch (error) { item.reject(error) }
+                                Promise.resolve(item.task(...item.args)).then(item.resolve, item.reject);
+                            } catch (error) {
+                                item.reject(error);
+                            }
                         }
 
                         periodCounter++;
@@ -106,12 +101,12 @@ export var createTokenBucketRateLimiter = (options) => {
                         }
 
                         if (counter >= refillIntervalTicks) {
-                            tokens = (tokens < burst && executedCounter < rate) ? tokens + 1 : tokens;
+                            tokens = tokens < burst && executedCounter < rate ? tokens + 1 : tokens;
                             counter = 0;
                         }
                     }, tick_time);
                 }
             });
-        }
-    }
-}
+        },
+    };
+};

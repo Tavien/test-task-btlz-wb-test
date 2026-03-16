@@ -3,31 +3,30 @@
 /**
  * @template T
  * @typedef {{
- *  push: (value: T) => void,
- *  shift: () => T,
- *  peek: () => T,
- *  capacity: () => number,
- *  size: () => number,
- *  clear: () => void,
- *  clone: () => CircularBuffer<T>,
- *  isEmpty: () => boolean,
- *  isFull: () => boolean,
- *  toArray: () => T[],
- *  forEach: <R>(callbackFn: (item: T, idx?: number, array?: T[]) => R, thisArg?: object) => void,
- *  values: () => ArrayIterator<T>,
- *  entries: () => ArrayIterator<[number, T]>,
- *  keys: () => ArrayIterator<number>
- *  [Symbol.iterator]: () => Iterator<T>
+ *     push: (value: T) => void;
+ *     shift: () => T;
+ *     peek: () => T;
+ *     capacity: () => number;
+ *     size: () => number;
+ *     clear: () => void;
+ *     clone: () => CircularBuffer<T>;
+ *     isEmpty: () => boolean;
+ *     isFull: () => boolean;
+ *     toArray: () => T[];
+ *     forEach: <R>(callbackFn: (item: T, idx?: number, array?: T[]) => R, thisArg?: object) => void;
+ *     values: () => ArrayIterator<T>;
+ *     entries: () => ArrayIterator<[number, T]>;
+ *     keys: () => ArrayIterator<number>;
+ *     [Symbol.iterator]: () => Iterator<T>;
  * }} CircularBuffer<T>
  */
 
 /**
- * 
  * @template T
- * @param { () => T } default_constructor
- * @param { number } [exponent=8]
- * @param { boolean } [overwrite=false]
- * @returns { CircularBuffer<T> }
+ * @param {() => T} default_constructor
+ * @param {number} [exponent=8] Default is `8`
+ * @param {boolean} [overwrite=false] Default is `false`
+ * @returns {CircularBuffer<T>}
  */
 export var createCircularBuffer = (default_constructor, exponent = 8, overwrite = false) => {
     var capacity = 1 << exponent;
@@ -41,8 +40,7 @@ export var createCircularBuffer = (default_constructor, exponent = 8, overwrite 
         push: (value) => {
             var cur = tail;
             if (size === capacity) {
-                if (overwrite)
-                    head = (head + 1) & mask;
+                if (overwrite) head = (head + 1) & mask;
                 else throw new Error();
             }
 
@@ -51,8 +49,7 @@ export var createCircularBuffer = (default_constructor, exponent = 8, overwrite 
             buffer[cur] = value;
         },
         shift: () => {
-            if (!size)
-                throw new Error();
+            if (!size) throw new Error();
             var cur = head;
             size--;
             head = (head + 1) & mask;
@@ -78,8 +75,8 @@ export var createCircularBuffer = (default_constructor, exponent = 8, overwrite 
             var i = 0;
 
             return {
-                next: () => ({ value: array[i++], done: i >= array.length })
-            }
+                next: () => ({ value: array[i++], done: i >= array.length }),
+            };
         },
         forEach: (lambda, thisArg) => {
             var array = Array.from({ length: size }, (_, i) => buffer[(head + i) & mask]);
@@ -97,5 +94,5 @@ export var createCircularBuffer = (default_constructor, exponent = 8, overwrite 
             var array = Array.from({ length: size }, (_, i) => buffer[(head + i) & mask]);
             return array.entries();
         },
-    }
-}
+    };
+};
