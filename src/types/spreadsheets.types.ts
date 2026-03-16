@@ -17,3 +17,27 @@ export type Tariff = {
     created_at: number,
     updated_at: number,
 }
+
+export type WbTariffResponse = {
+    response: {
+        data: {
+            dtNextBox:  string | null,
+            dtTillMax:  string,
+            warehouseList: [
+                {
+                    boxDeliveryBase: string | null,
+                    boxDeliveryCoefExpr: string | null,
+                    boxDeliveryLiter: string | null,
+                    boxDeliveryMarketplaceBase: string | null,
+                    boxDeliveryMarketplaceCoefExpr: string | null,
+                    boxDeliveryMarketplaceLiter: string | null,
+                    boxStorageBase: string | null,
+                    boxStorageCoefExpr: string | null,
+                    boxStorageLiter: string | null,
+                    geoName: string | null,
+                    warehouseName: string | null,
+                }
+            ]
+        }
+    }
+}
