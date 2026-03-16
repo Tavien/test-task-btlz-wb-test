@@ -1,7 +1,12 @@
 import { match, Result, type ResultType } from "#lib/result.js";
 
-import { RepositoryErrorCode } from "#constants/index.js";
-import { type RepositoryErr, Sheet, Tariff } from "#types/index.js";
+import { 
+    type RepositoryErr,
+    RepositoryErrorCode,
+    Sheet, 
+    Tariff 
+} from "#types/index.js";
+
 
 export interface GoogleSheetsRepository {
     ensureSheetExists(target: Sheet): Promise<ResultType<boolean, RepositoryErr>>

@@ -1,6 +1,6 @@
 import type { Knex } from "knex";
 
-import type { DbAdapter, QueryBuilder, ConflictBuilder } from "#types/index.js";
+import type { DbAdapter, QueryBuilder } from "#types/index.js";
 
 export const createKnexAdapter = (knex: Knex): DbAdapter => {
     const adapter = {

@@ -22,5 +22,5 @@ export enum SerializerErrorCode {
 }
 
 export enum ServiceErrorCode {
-    
+    // Не пригодилось но пусть будет 
 }

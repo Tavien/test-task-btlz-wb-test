@@ -6,8 +6,12 @@ import type { AppError, Tariff } from "#types/index.js";
 
 import { serializeWbResponse } from "#utils/serializer.js"
 
+export interface TariffService {
+    updateTariffsOnDate(date: string): Promise<ResultType<number, AppError>>;
+    readTariffsByDate(date: string): Promise<ResultType<Tariff[], AppError>>;
+}
 
-export const createTariffServie = (tariffRepository: TariffsRepository, wbRepository: WbRepository) => {
+export const createTariffServie = (tariffRepository: TariffsRepository, wbRepository: WbRepository): TariffService => {
     const updateTariffsOnDate = async (date: string): Promise<ResultType<number, AppError>> => {
         
         const wbRepoResult = await wbRepository.getBoxTariffs(date)

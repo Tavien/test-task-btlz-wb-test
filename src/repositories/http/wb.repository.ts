@@ -3,8 +3,8 @@ import { Result, type ResultType } from "#lib/result.js";
 import { 
     type RepositoryErr,
     type WbTariffResponse,
-    HttpAdapter,
     RepositoryErrorCode, 
+    HttpAdapter,
 } from "#types/index.js";
 
 export interface WbRepository {
