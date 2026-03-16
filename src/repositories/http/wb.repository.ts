@@ -7,13 +7,16 @@ import {
     RepositoryErrorCode, 
 } from "#types/index.js";
 
-export const createWbRepository = (fetchWraper: HttpAdapter) => {
+export interface WbRepository {
+    getBoxTariffs(date: string): Promise<ResultType<WbTariffResponse, RepositoryErr>>;
+}
+
+export const createWbRepository = (fetchWraper: HttpAdapter, apiKey: string): WbRepository => {
     
-    const getBoxTariffs = (params: {date: string, apiKey: string})
+    const getBoxTariffs = (date: string)
         : Promise<ResultType<WbTariffResponse, RepositoryErr>> => 
             fetchWraper.schedule(() => {
-                const {date, apiKey} = params;
-
+  
                 const url = new URL("https://common-api.wildberries.ru/api/v1/tariffs/box");
                 url.searchParams.append("date", date);
 

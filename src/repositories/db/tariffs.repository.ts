@@ -9,7 +9,12 @@ import {
 
 import { TablesName } from "#constants/index.js";
 
-export const createTariffsRepository = (dba: DbAdapter) => {
+export interface TariffsRepository {
+    createOrUpdateDailyTariffs(tariffs: Tariff[]): Promise<ResultType<number, RepositoryErr>>;
+    getTariffsByDate(date: string): Promise<ResultType<Tariff[], RepositoryErr>>;
+}
+
+export const createTariffsRepository = (dba: DbAdapter): TariffsRepository => {
     const createOrUpdateDailyTariffs = (tariffs: Tariff[]): Promise<ResultType<number, RepositoryErr>> => (
         dba.queryBuilder<Tariff>(TablesName.tariff)
             .insert(tariffs)

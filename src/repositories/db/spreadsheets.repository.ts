@@ -9,7 +9,12 @@ import {
 
 import { TablesName } from "#constants/index.js";
 
-export const createSpreadsheetsRepository = (dba: DbAdapter) => {
+export interface SpreadsheetsRepository {
+    addSheet(sheet: Sheet): Promise<ResultType<Sheet, RepositoryErr>>;
+    getAllSheets(): Promise<ResultType<Sheet[], RepositoryErr>>;
+}
+
+export const createSpreadsheetsRepository = (dba: DbAdapter): SpreadsheetsRepository => {
 
     const addSheet = (sheet: Sheet): Promise<ResultType<Sheet, RepositoryErr>> => (
         dba.queryBuilder<Sheet>(TablesName.spreadsheet)
