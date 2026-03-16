@@ -1,0 +1,26 @@
+export enum RepositoryErrorCode {
+    // Sheets
+    ADD_SHEET_FAILED = "ADD_SHEET_FAILED",
+    GET_SHEETS_FAILED = "GET_SHEETS_FAILED",
+    SHEET_NOT_CREATED = "SHEET_NOT_CREATED",
+    SHEETS_NOT_FOUND = "SHEETS_NOT_FOUND",
+
+    // Tariffs
+    CREATE_UPDATE_TARIFFS_FAILED = "CREATE_UPDATE_TARIFFS_FAILED",
+    GET_TARIFFS_FAILED = "GET_TARIFFS_FAILED",
+    TARIFFS_NOT_FOUND = "TARIFFS_NOT_FOUND",
+
+    // WB
+    FETCH_TARIFFS_FAILED = "FETCH_TARIFFS_FAILED",
+
+    // Google API
+    GOOGLE_SHEETS_ERROR = "GOOGLE_SHEETS_ERROR",
+}
+
+export enum SerializerErrorCode {
+    FAILED_SERIALIZE_WB_RESPONSE = "FAILED_SERIALIZE_WB_RESPONSE"
+}
+
+export enum ServiceErrorCode {
+    // Не пригодилось но пусть будет 
+}
