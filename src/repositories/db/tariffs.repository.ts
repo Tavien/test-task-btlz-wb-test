@@ -1,4 +1,4 @@
-import { Result, type ResultType } from "../lib/result.js";
+import { Result, type ResultType } from "../../lib/result.js";
 
 import { 
     type Tariff, 
