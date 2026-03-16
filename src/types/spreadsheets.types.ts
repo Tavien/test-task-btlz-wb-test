@@ -1,7 +1,7 @@
 export type Tariff = {
     id: number,
     date: number,
-    dt_next_box: number,
+    dt_next_box: number | null,
     dt_till_max: number,
     box_delivery_base: number,
     box_delivery_coef_expr: number,

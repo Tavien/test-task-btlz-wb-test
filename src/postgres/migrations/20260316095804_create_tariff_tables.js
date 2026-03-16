@@ -35,7 +35,7 @@ export async function up(knex) {
         table.string("warehouse_name", 255);
         table.string("geo_name", 255).notNullable();
 
-        table.date("dt_next_box").notNullable();
+        table.date("dt_next_box");
         table.date("dt_till_max").notNullable();
 
         table.decimal("box_delivery_base", 10, 2).notNullable();
@@ -44,12 +44,12 @@ export async function up(knex) {
         table.decimal("box_delivery_marketplace_base", 10, 2).notNullable();
         table.decimal("box_delivery_marketplace_coef_expr", 10, 4).notNullable();
         table.decimal("box_delivery_marketplace_liter", 10, 2).notNullable();
-        
+
         table.decimal("box_storage_base", 10, 2).notNullable();
         table.decimal("box_storage_coef_expr", 10, 4).notNullable();
         table.decimal("box_storage_liter", 10, 2).notNullable();
 
-        table.timestamps(true, true); 
+        table.timestamps(true, true);
 
         table.unique(["date", "warehouse_name"], {
             indexName: "box_tariff_date_warehouse_name_uq",
