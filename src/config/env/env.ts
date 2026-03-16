@@ -12,7 +12,8 @@ const envSchema = z.object({
     POSTGRES_DB: z.string(),
     POSTGRES_USER: z.string(),
     POSTGRES_PASSWORD: z.string(),
-    GOOGLE_API_KEY: z.string(),
+    GOOGLE_CREDENTIALS: z.string(),
+    WB_CREDENTIALS: z.string(),
     APP_PORT: z.union([
         z.undefined(),
         z
@@ -28,7 +29,8 @@ const env = envSchema.parse({
     POSTGRES_DB: process.env.POSTGRES_DB,
     POSTGRES_USER: process.env.POSTGRES_USER,
     POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
-    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    GOOGLE_CREDENTIALS: process.env.GOOGLE_CREDENTIALS,
+    WB_CREDENTIALS: process.env.WB_CREDENTIALS,
     NODE_ENV: process.env.NODE_ENV,
     APP_PORT: process.env.APP_PORT,
 });
