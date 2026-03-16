@@ -12,6 +12,9 @@ export enum RepositoryErrorCode {
 
     // WB
     FETCH_TARIFFS_FAILED = "FETCH_TARIFFS_FAILED",
+
+    // Google API
+    GOOGLE_SHEETS_ERROR = "GOOGLE_SHEETS_ERROR",
 }
 
 export enum SerializerErrorCode {
