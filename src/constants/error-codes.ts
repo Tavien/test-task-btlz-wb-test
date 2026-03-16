@@ -17,3 +17,7 @@ export enum RepositoryErrorCode {
 export enum SerializerErrorCode {
     FAILED_SERIALIZE_WB_RESPONSE = "FAILED_SERIALIZE_WB_RESPONSE"
 }
+
+export enum ServiceErrorCode {
+    
+}
