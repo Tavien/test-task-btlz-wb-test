@@ -14,12 +14,12 @@ const tariffSyncContainer = tariffSyncDiContainer();
 
 console.log(" ==== Job Startet ====");
 
-const taskGetFromWb = cron.schedule('*/1 * * * *', () => {
+const taskGetFromWb = cron.schedule('0 * * * *', () => {
     console.log('Update from WB started');
     tariffSyncContainer.domain.getFromWb();
 });
 
-const taskSetToGoogleSheet = cron.schedule('*/2 * * * *', () => {
+const taskSetToGoogleSheet = cron.schedule('*/15 * * * *', () => {
     console.log('Upload to GS started');
     tariffSyncContainer.domain.setToGoogleSheet();
 });

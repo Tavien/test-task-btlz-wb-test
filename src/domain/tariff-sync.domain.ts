@@ -13,9 +13,9 @@ export const createTariffSyncDomain = (tariffService: TariffService, sheetServic
 
     const setToGoogleSheet = async () => {
         const tariffsResult = await tariffService.readTariffsByDate(today());
-
+        
         match(tariffsResult)({
-            onOk: (tariffs) => (
+            onOk: (tariffs) => (                
                 sheetService.updateAllSheets(tariffs)
             ),
             onErr: (error: AppError) => {

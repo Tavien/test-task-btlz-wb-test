@@ -33,12 +33,7 @@ export const createTariffServie = (tariffRepository: TariffsRepository, wbReposi
 
     const readTariffsByDate = async (date: string): Promise<ResultType<Tariff[], AppError>> => {
         
-        const tariffsResult = await tariffRepository.getTariffsByDate(date);
-
-        return match(tariffsResult)({
-            onOk: (data) => ( data ),
-            onErr: (error) => Result.Err(error) as any
-        })
+        return tariffRepository.getTariffsByDate(date);
     }
 
     return {
