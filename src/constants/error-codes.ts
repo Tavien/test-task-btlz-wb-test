@@ -13,3 +13,7 @@ export enum RepositoryErrorCode {
     // WB
     FETCH_TARIFFS_FAILED = "FETCH_TARIFFS_FAILED",
 }
+
+export enum SerializerErrorCode {
+    FAILED_SERIALIZE_WB_RESPONSE = "FAILED_SERIALIZE_WB_RESPONSE"
+}
